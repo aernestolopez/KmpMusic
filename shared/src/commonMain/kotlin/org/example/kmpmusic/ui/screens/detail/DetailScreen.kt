@@ -2,7 +2,6 @@ package org.example.kmpmusic.ui.screens.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -22,20 +21,19 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import kmpmusic.shared.generated.resources.Res
 import kmpmusic.shared.generated.resources.back
-import org.example.kmpmusic.musics
+import org.example.kmpmusic.Music
 import org.example.kmpmusic.ui.screens.Screen
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun DetailScreen(){
-    val music = musics[0]
+fun DetailScreen(music: Music, onBack: () -> Unit){
     Screen {
         Scaffold (
             topBar = {
                 TopAppBar(
                     title = {Text(music.title)},
                     navigationIcon = {
-                        IconButton(onClick ={ /*ToDo*/}){
+                        IconButton(onClick =onBack){
                             Icon(
                                 imageVector = Icons.AutoMirrored.Default.ArrowBack,
                                 contentDescription = stringResource(Res.string.back)

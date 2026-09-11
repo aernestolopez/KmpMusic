@@ -2,6 +2,7 @@ package org.example.kmpmusic.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -35,7 +36,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onMusicClick: (Music)-> Unit) {
     Screen {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
         Scaffold(
@@ -55,7 +56,7 @@ fun HomeScreen() {
                 modifier = Modifier.padding(padding)
             ) {
                 items(musics, key = { it.id }) {
-                    MusicItem(music = it)
+                    MusicItem(music = it, onClick = {onMusicClick(it)})
                 }
             }
         }
@@ -94,8 +95,10 @@ fun MusicGridItem(music: Music) {
 
 
 @Composable
-fun MusicItem(music: Music){
-    Column {
+fun MusicItem(music: Music, onClick: () -> Unit){
+    Column(
+        modifier = Modifier.clickable(onClick = onClick)
+    ) {
         AsyncImage(
             model = music.cover,
             contentDescription = music.title,
